@@ -1,0 +1,36 @@
+#include <mutex>
+#include <iostream>
+using namespace std;
+
+template <typename T>
+class atom
+{
+public:
+	mutex m;
+	T data;
+	atom(T const &x) 
+	{
+		m.lock();
+		T y;
+    y = x;
+		m.unlock();
+		return y;
+  
+	}
+
+	T operator = (T const & x)
+	{  if(m.try_lock == TRUE)
+		{
+		m.lock();
+		data = x;
+		m.unluck();
+		return *this;
+	}
+	}
+
+};
+
+int main()
+{
+	return 0;
+}
