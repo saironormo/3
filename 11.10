@@ -1,0 +1,55 @@
+#include <iostream>
+#include <ctime>
+#include <cmath>
+#include <thread>
+using namespace std;
+
+void мне_всё_ещё_нравится_кириллица_в_названиях (int *a, int *b, int first, int last, int n){
+	for(int i = first; i < last && i < n; i++) {
+		*a = *a + b[i];
+	}
+}
+
+int main() {
+	 setlocale(0,"");
+	int n;
+	cin >> n;
+	n = n*10;
+	int *arr;
+	arr = new int[n];
+	srand(time(0));
+	for(int i = 0; i < n; i++)
+		arr[i] = rand() % 10000;
+	clock_t start;
+	start = clock();
+	int s = 0;
+	for(int i = 0; i < n; i++)
+	{
+		s = s+ arr[i];
+	}
+	clock_t finish;
+	finish = clock();
+	cout << float(start - finish) / -CLK_TCK << endl;
+    s = 0;
+	start = clock();
+	int *ar;
+	ar = new int[10];
+	thread *thr[10];
+	for(int i = 0; i < 10; i++) {
+		ar[i] = 0;
+		thr[i] = new thread(мне_всё_ещё_нравится_кириллица_в_названиях, ar+i, arr, i*10, (i + 1)*10, n);
+	}
+	for(int i = 0; i < 10; i++)
+	{
+		thr[i]->join();
+	}
+
+	for(int i = 0; i < 10; i++)
+	{
+		s = s + ar[i];
+	}
+	finish = clock();
+	cout << double(start - finish) / -CLK_TCK << endl;
+	cin >> s;
+	return 0;	
+}              
