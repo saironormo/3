@@ -1,0 +1,56 @@
+#include <iostream>
+#include <thread>
+#include <mutex>
+#include <condition_variable>
+using namespace std;
+
+
+class Future{
+public:
+	mutex m;
+	unique_lock<mutex> l;
+	condition_variable c;        
+	int *data;
+	bool *valid;
+
+ 	Future()
+	{
+		data = 0;
+		valid = 0;
+	}  
+	Future(Future &f)
+	{
+		data = f.data;
+		valid = f.valid;
+		f.data = 0;
+		f.valid = 0;
+	}  
+
+		Future operator = (Future & f)
+		{
+		data = f.data;
+		valid = f.valid;
+		f.data = 0;
+		f.valid = 0;
+	}
+
+	    ~Future(){
+    	delete data;
+    	delete valid;
+    }
+
+
+ 	int get(){
+ 	    while(valid == 0)
+		{
+ 	    c.wait(l); 
+		}
+ 		return *data;
+ 	}
+
+
+};
+
+int main(){      
+	return 0;
+}
