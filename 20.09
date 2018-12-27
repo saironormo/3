@@ -5,7 +5,6 @@ exec 6>&1
 exec > $LOG
 exec 7<&0
 
-
 for ((n=0; n<4; n++)); do
 
 
