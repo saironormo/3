@@ -1,0 +1,37 @@
+# !/bin/bash
+g++ -std=gnu++17 programma_dlya_reshenia_slay2x2.cpp -o programma_dlya_reshenia_slay2x2
+LOG=log.txt
+exec 6>&1
+exec > $LOG
+exec 7<&0
+
+
+for ((n=0; n<4; n++)); do
+
+
+exec 0<test/$[n]tin.txt
+exec 1>test/$[n]tout.txt
+./programma_dlya_reshenia_slay2x2
+
+
+if cmp -s test/$[n]tin.txt test/$[n]tout.txt; then
+        echo Пройден
+        else echo Не пройден
+fi
+
+
+done
+
+***
+
+0tin: 1 2 3 4 5 6
+0tout: x1 = -1 x2 = 2
+
+1tin: 1 2 3 1 2 3
+1tout: x1 = ? x2 = 3 - 2*x1
+
+2tin: 0 0 0 0 0 0
+2tout: x1 = ? x2 = ?
+
+3tin: 0 0 1 0 0 0 
+3tout: ???
