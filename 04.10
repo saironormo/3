@@ -1,0 +1,166 @@
+#include <iostream>
+#include <queue>
+#include <string>
+using namespace std;
+ 
+
+void t1()
+{ queue<string> t;
+t.push("2ijowefm");
+t.push("twryw");
+t.push("235t");
+t.push("aert");
+string a = "2ijowefm";
+if (t.front() == a)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t2()
+{
+	queue<string> t;
+t.push("2ijowefm");
+t.push("twryw");
+t.push("235t");
+t.push("aert");
+string a = "twryw";
+t.pop();
+if (t.front() == a)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t3()
+{queue<string> t1;
+t1.push("2ijowefm");
+t1.push("twryw");
+t1.push("235t");
+t1.push("aert");
+queue<string> t2;
+t2 = t1;
+for (int i = 0; i < 2; i++)
+{t1.pop();
+t2.pop();
+}
+if (t1.front() == t2.front())
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t4()
+{
+	queue<int> t;
+	unsigned int n = 23532;
+	for (int i = 0; i < n; i++)
+		t.push(i);
+	if (t.size() == n)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t5()
+{queue<int> t;
+if (t.empty() == true)
+	cout << "пройден";
+else cout << "не пройден";
+}
+	
+void t6()
+{
+	queue<int> t;
+	t.push(11);
+if (t.empty() == false)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t7()
+{
+		queue<string> t;
+		t.push("2ijowefm");
+t.push("twryw");
+t.push("235t");
+t.push("aert");
+string a = "aert";
+
+if (t.back() == a)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t8()
+{	queue<string> t1;
+t1.push("2ijowefm");
+t1.push("twryw");
+t1.push("235t");
+t1.push("aert");
+queue<string> t2;
+swap(t1, t2);
+if (t2.front() == "2ijowefm" && t1.empty())
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t9()
+{
+	queue<string> t1;
+t1.push("a");
+t1.push("b");
+t1.push("c");
+t1.push("d");
+
+queue<string> t2;
+t2.push("e");
+t2.push("f");
+t2.push("g");
+t2.push("h");
+if (t2>t1)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+void t10()
+{
+		queue<string> t1;
+	t1.push("m");
+
+queue<string> t2;
+t2.push("e");
+t2.push("f");
+t2.push("g");
+t2.push("h");
+if (t2<t1)
+	cout << "пройден";
+else cout << "не пройден";
+}
+
+
+
+
+int main()
+{ setlocale(0,"");
+	t1();
+	cout << endl;
+	t2();
+	cout << endl;
+	t3();
+	cout << endl;
+	t4();
+	cout << endl;
+	t5();
+	cout << endl;
+	t6();
+	cout << endl;
+	t7();
+	cout << endl;
+	t8();
+	cout << endl;
+	t9();
+	cout << endl;
+	t10();
+	cout << endl;
+int c;
+cin >> c;
+
+	return 0;
+}
