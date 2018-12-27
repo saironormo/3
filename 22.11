@@ -1,0 +1,82 @@
+#include <iostream>
+#include <cmath>
+#include <thread>
+using namespace std;
+
+
+void sum(int *a, int *b, int *c, int n)
+{
+    for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
+        c[i*n+j] = a[i*n+j] + b[i*n+j];
+
+
+}
+
+
+
+void dif(int *a, int *b, int *c, int n)
+{
+  for(int i = 0; i < n; i++)
+		for(int j = 0; j < n; j++)
+        c[i*n+j] = a[i*n+j] + b[i*n+j];
+}
+
+
+void mul (int *a, int *b, int *c, int n)
+{
+	int m;
+	m = n/2;
+	int *M = new int [29*m*m];
+
+
+
+
+ 
+        sum(&M[3*m*m], &M[8*m*m], &M[2*m*m], m);
+        dif(&M[0], &M[9*m*m], &M[8*m*m], m);
+        dif(&M[2*m*m], &M[10*m*m], &M[0], m);
+        dif(&M[9*m*m], &M[11*m*m], &M[m*m], m);
+        dif(&M[4*m*m], &M[12*m*m], &M[5*m*m], m);
+        dif(&M[12*m*m], &M[13*m*m], &M[7*m*m], m);
+        dif(&M[5*m*m], &M[14*m*m], &M[7*m*m], m);
+        dif(&M[6*m*m], &M[15*m*m], &M[13*m*m], m);
+ 
+
+		thread t1 (mul, &M[16*m*m], &M[9*m*m], &M[13*m*m], m);
+        thread t2 (mul, &M[17*m*m], &M[0], &M[4*m*m], m);
+        thread t3 (mul, &M[18*m*m], &M[m*m], &M[6*m*m], m);
+        thread t4 (mul, &M[19*m*m], &M[10*m*m], &M[14*m*m], m);
+        thread t5 (mul, &M[20*m*m], &M[8*m*m], &M[12*m*m], m);
+        thread t6 (mul, &M[21*m*m], &M[11*m*m], &M[7*m*m], m);
+        thread t7 (mul, &M[22*m*m], &M[3*m*m], &M[15*m*m], m);
+		t1.join(); 
+		t2.join(); 
+		t3.join(); 
+		t4.join(); 
+		t5.join(); 
+		t6.join(); 
+		t7.join();
+
+
+
+
+        sum(&M[17*m*m], &M[23*m*m], &M[16*m*m], m);
+        sum(&M[19*m*m], &M[24*m*m], &M[23*m*m], m);
+		sum(&M[18*m*m], &M[25*m*m], &M[17*m*m], m);
+		sum(&M[20*m*m], &M[26*m*m], &M[23*m*m], m);
+		sum(&M[21*m*m], &M[26*m*m], &M[26*m*m], m);
+        dif(&M[22*m*m], &M[27*m*m], &M[24*m*m], m);
+        sum(&M[20*m*m], &M[28*m*m], &M[24*m*m], m);
+ 
+
+     
+		delete M;
+}
+
+int main()
+{
+
+
+	return 0;
+}
